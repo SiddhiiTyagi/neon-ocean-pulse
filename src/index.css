@@ -2,41 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* NEON OCEAN HAZARD PLATFORM DESIGN SYSTEM */
+/* All colors MUST be HSL. Neon theme with ocean-inspired accents */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base neon dark theme */
+    --background: 220 25% 8%;
+    --foreground: 180 100% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Cards with glassmorphic effect */
+    --card: 220 25% 12%;
+    --card-foreground: 180 100% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Popovers */
+    --popover: 220 25% 10%;
+    --popover-foreground: 180 100% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary neon cyan */
+    --primary: 190 100% 50%;
+    --primary-foreground: 220 25% 8%;
+    --primary-glow: 190 100% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary electric blue */
+    --secondary: 210 100% 45%;
+    --secondary-foreground: 180 100% 95%;
+    --secondary-glow: 210 100% 65%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted elements */
+    --muted: 220 25% 15%;
+    --muted-foreground: 180 50% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent purple-pink */
+    --accent: 280 100% 60%;
+    --accent-foreground: 180 100% 95%;
+    --accent-glow: 280 100% 80%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Destructive red with neon effect */
+    --destructive: 0 100% 55%;
+    --destructive-foreground: 180 100% 95%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Success green */
+    --success: 120 100% 45%;
+    --success-foreground: 220 25% 8%;
 
-    --radius: 0.5rem;
+    /* Warning orange */
+    --warning: 35 100% 55%;
+    --warning-foreground: 220 25% 8%;
+
+    /* Borders and inputs */
+    --border: 190 50% 25%;
+    --input: 220 25% 18%;
+    --ring: 190 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Neon gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-glow)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-glow)));
+    --gradient-ocean: linear-gradient(180deg, hsl(190 100% 20%), hsl(220 100% 15%));
+    --gradient-glass: linear-gradient(135deg, hsl(190 50% 15% / 0.2), hsl(220 50% 20% / 0.1));
+
+    /* Shadows with neon glow */
+    --shadow-neon: 0 0 20px hsl(var(--primary) / 0.5);
+    --shadow-secondary: 0 0 20px hsl(var(--secondary) / 0.3);
+    --shadow-accent: 0 0 20px hsl(var(--accent) / 0.3);
+    --shadow-glass: 0 8px 32px hsl(220 25% 0% / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +136,122 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+    background: var(--gradient-ocean);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  /* Glassmorphic card variants */
+  .glass-card {
+    @apply backdrop-blur-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl;
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:scale-[1.02];
+  }
+
+  /* Neon button variants */
+  .btn-neon {
+    @apply relative overflow-hidden bg-gradient-to-r from-primary to-primary-glow text-primary-foreground font-semibold py-3 px-6 rounded-lg;
+    box-shadow: var(--shadow-neon);
+    transition: var(--transition-smooth);
+  }
+
+  .btn-neon:hover {
+    @apply scale-105;
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.8);
+  }
+
+  .btn-neon:before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%];
+    transition: transform 0.6s;
+  }
+
+  .btn-neon:hover:before {
+    @apply translate-x-[100%];
+  }
+
+  /* Text glow effects */
+  .text-glow {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.8);
+  }
+
+  .text-glow-accent {
+    text-shadow: 0 0 10px hsl(var(--accent) / 0.8);
+  }
+
+  /* Navigation active state */
+  .nav-active {
+    @apply bg-gradient-to-r from-primary/20 to-secondary/20 border-l-2 border-primary;
+    box-shadow: inset 5px 0 10px hsl(var(--primary) / 0.3);
+  }
+
+  /* Map container styles */
+  .map-container {
+    @apply relative rounded-xl overflow-hidden;
+    box-shadow: var(--shadow-glass), inset 0 0 0 1px hsl(var(--border));
+  }
+
+  /* Animated background */
+  .animated-bg {
+    background: var(--gradient-ocean);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  /* Status indicators */
+  .status-danger {
+    @apply bg-gradient-to-r from-destructive to-red-600 text-destructive-foreground;
+    box-shadow: 0 0 15px hsl(var(--destructive) / 0.5);
+  }
+
+  .status-warning {
+    @apply bg-gradient-to-r from-warning to-yellow-500 text-warning-foreground;
+    box-shadow: 0 0 15px hsl(var(--warning) / 0.5);
+  }
+
+  .status-success {
+    @apply bg-gradient-to-r from-success to-green-500 text-success-foreground;
+    box-shadow: 0 0 15px hsl(var(--success) / 0.5);
+  }
+}
+
+@layer utilities {
+  /* Custom keyframes */
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.4); }
+    50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.8); }
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* Animation utilities */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
   }
 }
