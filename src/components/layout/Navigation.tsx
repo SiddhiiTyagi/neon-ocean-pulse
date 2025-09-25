@@ -14,19 +14,23 @@ import {
   X,
   Shield,
   Users,
+  Settings,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { NotificationCenter } from "@/components/notifications/NotificationCenter";
 
 const navigationItems = [
   { href: "/", label: "Dashboard", icon: Waves },
   { href: "/map", label: "Ocean Map", icon: MapPin },
   { href: "/report", label: "Report Hazard", icon: AlertTriangle },
+  { href: "/reports", label: "Reports History", icon: BarChart3 },
   { href: "/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/alerts", label: "Alerts", icon: Bell },
   { href: "/social", label: "Social Feed", icon: MessageSquare },
   { href: "/community", label: "Community", icon: Users },
   { href: "/safety", label: "Safety Guide", icon: Shield },
+  { href: "/settings", label: "Settings", icon: Settings },
   { href: "/about", label: "About", icon: Info },
   { href: "/contact", label: "Contact", icon: Mail },
 ];
@@ -60,14 +64,19 @@ export function Navigation() {
           "md:translate-x-0"
         )}
       >
-        {/* Logo */}
-        <div className="flex items-center gap-3 mb-8 px-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-            <Waves className="h-6 w-6 text-white" />
+        {/* Logo and Notifications */}
+        <div className="flex items-center justify-between mb-8 px-2">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+              <Waves className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-glow">OceanGuard</h1>
+              <p className="text-sm text-muted-foreground">Hazard Platform</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-xl font-bold text-glow">OceanGuard</h1>
-            <p className="text-sm text-muted-foreground">Hazard Platform</p>
+          <div className="hidden md:block">
+            <NotificationCenter />
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 import { Navigation } from "./Navigation";
+import { ConnectionStatus } from "@/components/status/ConnectionStatus";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ export function Layout({ children }: LayoutProps) {
           {children}
         </div>
       </main>
+      <ConnectionStatus />
     </div>
   );
 }

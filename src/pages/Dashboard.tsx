@@ -12,6 +12,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { WeatherWidget } from "@/components/weather/WeatherWidget";
 
 const stats = [
   {
@@ -204,8 +205,17 @@ export default function Dashboard() {
                       >
                         {alert.status}
                       </span>
-                    </div>
-                  </div>
+      </div>
+
+      {/* Weather Widget */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+      >
+        <WeatherWidget />
+      </motion.div>
+    </div>
                 ))}
               </div>
               <Button variant="outline" className="w-full mt-4" asChild>
